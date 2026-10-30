@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nebula Launcher — скачать</title>
+<meta name="description" content="Nebula Launcher: быстрый лаунчер Minecraft с Fabric, Forge, OptiFine, менеджером модов и автоматической оптимизацией графики.">
+<meta name="theme-color" content="#0c0816">
+<style>
+:root{--a1:#8b5cf6;--a2:#ec4899;--bg:#0c0816;--t:#f6f0ff;--m:#b9aad8;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{font:16px/1.55 'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;color:var(--t);background:var(--bg);min-height:100vh;overflow-x:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(circle at 30% 20%,#1d1038,var(--bg) 70%)}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:fl 18s ease-in-out infinite alternate}
+.b1{width:540px;height:540px;background:var(--a1);left:-160px;top:-180px}
+.b2{width:500px;height:500px;background:var(--a2);right:-140px;bottom:-200px;animation-delay:-6s}
+.b3{width:340px;height:340px;background:#6d28d9;left:45%;top:30%;opacity:.3;animation-delay:-11s}
+@keyframes fl{to{transform:translate(90px,60px) scale(1.18)}}
+#fx{position:absolute;inset:0;width:100%;height:100%}
+.wrap{max-width:1040px;margin:0 auto}
+header.top{display:flex;align-items:center;justify-content:space-between;padding-block:22px;gap:16px}
+.logo{font-weight:800;letter-spacing:.2em;font-size:13px;display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo b{font-weight:400;opacity:.6;letter-spacing:.3em}
+.gem{width:16px;height:16px;border-radius:5px;background:linear-gradient(135deg,var(--a1),var(--a2));transform:rotate(45deg);box-shadow:0 0 14px var(--a2)}
+nav{display:flex;gap:6px}
+nav a{padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--m);font-size:14px;transition:.2s}
+nav a:hover{background:rgba(255,255,255,.1);color:var(--t)}
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.04));backdrop-filter:blur(26px) saturate(1.5);-webkit-backdrop-filter:blur(26px) saturate(1.5);border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 12px 44px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.16)}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-block:48px 56px}
+.tag{display:inline-block;padding:4px 14px;border-radius:99px;background:linear-gradient(90deg,var(--a1),var(--a2));font-size:12px;font-weight:700;letter-spacing:.08em}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.05;margin:18px 0 16px;font-weight:800;text-wrap:balance}
+h1 span{background:linear-gradient(90deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--m);font-size:18px;max-width:34em}
+.dl{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.btn{display:flex;flex-direction:column;justify-content:center;min-height:62px;padding:0 28px;border-radius:18px;text-decoration:none;transition:.25s;position:relative;overflow:hidden}
+.btn b{font-size:17px;letter-spacing:.06em}
+.btn small{font-size:12px;opacity:.85;letter-spacing:.04em}
+.btn.pri{background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 8px 30px rgba(236,72,153,.4)}
+.btn.pri::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:sh 3.5s infinite}
+@keyframes sh{to{left:130%}}
+.btn.sec{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+.btn:hover{transform:translateY(-3px)}
+.btn.pri:hover{box-shadow:0 14px 40px rgba(236,72,153,.55)}
+.btn.sec:hover{background:rgba(255,255,255,.15)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.meta{margin-top:16px;color:var(--m);font-size:13px}
+/* макет окна лаунчера */
+.mock{padding:14px;transform:rotate(1.2deg)}
+.mock .tb{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 12px;font-size:11px;letter-spacing:.2em;font-weight:800}
+.mock .tb span{opacity:.5;font-weight:400}
+.mock .news{border-radius:16px;padding:26px 22px;min-height:178px;background:linear-gradient(135deg,rgba(139,92,246,.45),rgba(236,72,153,.25));position:relative;overflow:hidden}
+.mock .news .tag{font-size:10px;padding:3px 10px}
+.mock .news h3{font-size:22px;margin:12px 0 4px}
+.mock .news p{color:var(--m);font-size:13px;max-width:15em}
+.mock .news .bolt{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:84px;filter:drop-shadow(0 0 28px var(--a1))}
+.mock .bar{display:flex;gap:8px;margin-top:10px;align-items:stretch}
+.mock .chip{flex:1;display:flex;align-items:center;gap:8px;padding:8px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);min-width:0}
+.mock .chip i{width:26px;height:26px;border-radius:8px;flex:none;background:linear-gradient(135deg,var(--a1),var(--a2))}
+.mock .chip div{line-height:1.2;min-width:0}.mock .chip small{display:block;color:var(--m);font-size:9px}.mock .chip b{font-size:12px;white-space:nowrap}
+.mock .go{flex:1.1;border-radius:13px;background:linear-gradient(135deg,var(--a1),var(--a2));display:grid;place-items:center;font-weight:700;letter-spacing:.12em;font-size:14px}
+.mobnote{padding:16px 18px;margin-bottom:8px;font-size:14.5px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;border-color:rgba(251,146,60,.5)}
+.mobnote b{color:#fff}.mobnote .btn{min-height:46px;padding:0 20px;border:0;font:inherit;color:inherit;cursor:pointer}
+section{padding-block:34px}
+h2{font-size:clamp(26px,4vw,36px);margin-bottom:8px;font-weight:800;text-wrap:balance}
+.sub{color:var(--m);max-width:40em;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{padding:22px}
+.card .ic{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:20px;background:linear-gradient(135deg,var(--a1),var(--a2));margin-bottom:14px}
+.card h3{font-size:17px;margin-bottom:6px}
+.card p{color:var(--m);font-size:14.5px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.step{padding:22px}
+.step h3{font-size:17px;margin:12px 0 6px}.step p{color:var(--m);font-size:14.5px}
+.step .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)}
+.warn{margin-top:16px;padding:16px 20px;border-radius:16px;background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.35);font-size:14.5px;color:#ffe3cc}
+.warn b{color:#fff}
+details{padding:0;border-radius:16px;margin-bottom:10px;overflow:hidden}
+summary{cursor:pointer;padding:16px 20px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';color:var(--m);font-size:20px;line-height:1}
+details[open] summary::after{content:'–'}
+details p{padding:0 20px 18px;color:var(--m);font-size:14.5px}
+.final{text-align:center;padding:40px 24px;margin-block:20px 10px}
+.final .dl{justify-content:center}
+footer{padding-block:30px 40px;text-align:center;color:var(--m);font-size:13px}
+@media(max-width:560px){.dl .btn{width:100%}.hero{gap:28px}.card,.step{padding:18px}.final{padding:28px 16px}}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:24px}.mock{transform:none;max-width:460px}nav{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="bg"><i class="b1"></i><i class="b2"></i><i class="b3"></i><canvas id="fx"></canvas></div>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#"><span class="gem"></span>NEBULA<b>LAUNCHER</b></a>
+    <nav><a href="#features">Возможности</a><a href="#install">Установка</a><a href="#faq">Вопросы</a></nav>
+  </header>
+
+  <div id="mobile" class="mobnote glass" hidden>
+    <b>Ты на телефоне.</b> Лаунчер работает только на компьютере с Windows. Отправь себе ссылку на эту страницу и открой её на компьютере.
+    <button id="copylink" class="btn sec" type="button"><b>Скопировать ссылку</b></button>
+  </div>
+
+  <div class="hero">
+    <div>
+      <span class="tag">v<span data-v>1.1.0</span> · WINDOWS</span>
+      <h1>Minecraft без лишнего. <span>Быстро и красиво.</span></h1>
+      <p class="lead">Vanilla, Fabric, Forge и OptiFine от 1.12 до свежих версий. Графика сама настраивается на максимум FPS, моды ставятся в два клика, а лаунчер обновляется сам.</p>
+      <div class="dl" id="download">
+        <a class="btn pri" data-dl="exe" href="#"><b>Скачать .exe</b><small>один файл, без установки · <span data-size="exe"></span></small></a>
+        <a class="btn sec" data-dl="zip" href="#"><b>Скачать .zip</b><small>распаковать и запустить · <span data-size="zip"></span></small></a>
+      </div>
+      <p class="meta">Windows 10 / 11, 64 бит. Java докачается сама. Бесплатно.</p>
+    </div>
+    <div class="mock glass" aria-hidden="true">
+      <div class="tb">NEBULA<span>LAUNCHER</span></div>
+      <div class="news"><span class="tag">ОПТИМИЗАЦИЯ</span><h3>Минимум графики — сразу</h3><p>Без теней и лишних эффектов с первого запуска.</p><div class="bolt">⚡</div></div>
+      <div class="bar"><div class="chip"><i></i><div><small>Аккаунт</small><b>CoolMiner42</b></div></div><div class="chip"><i></i><div><small>Fabric · установлена</small><b>1.21.1</b></div></div><div class="go">ИГРАТЬ</div></div>
+    </div>
+  </div>
+
+  <section id="features">
+    <h2>Что внутри</h2>
+    <p class="sub">Всё, чтобы запустить игру быстро и не возиться с настройками.</p>
+    <div class="grid">
+      <div class="card glass"><div class="ic">⚡</div><h3>Оптимизация графики</h3><p>При первом запуске версии лаунчер ставит быструю графику: без теней, анимаций и тяжёлой прорисовки. Всё можно настроить.</p></div>
+      <div class="card glass"><div class="ic">🧩</div><h3>Менеджер модов</h3><p>Включай и выключай моды одним кликом, ищи на Modrinth и ставь вместе с зависимостями. Есть готовый пакет для FPS.</p></div>
+      <div class="card glass"><div class="ic">🧵</div><h3>Fabric, Forge, OptiFine</h3><p>Нужная версия и загрузчик скачиваются при первом нажатии «Играть». Каждая версия получает свою папку.</p></div>
+      <div class="card glass"><div class="ic">🔄</div><h3>Автообновление</h3><p>Новые версии лаунчера подтягиваются прямо из окна, без переустановки.</p></div>
+      <div class="card glass"><div class="ic">🛡</div><h3>Проверка файлов</h3><p>Java от Mojang, библиотеки и ресурсы качаются параллельно, каждый файл сверяется по SHA-1.</p></div>
+      <div class="card glass"><div class="ic">🎮</div><h3>Играй по нику</h3><p>Аккаунт Microsoft не нужен. Можно сразу заходить на сервер: адрес задаётся в настройках.</p></div>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>Как установить</h2>
+    <p class="sub">Займёт меньше минуты.</p>
+    <div class="steps">
+      <div class="step glass"><div class="n">1</div><h3>Скачай файл</h3><p>Возьми .exe, если хочешь один файл. Или .zip: распакуй архив в любую папку.</p></div>
+      <div class="step glass"><div class="n">2</div><h3>Запусти</h3><p>Открой <b>NebulaLauncher.exe</b> (в архиве: <b>Nebula Launcher.exe</b>). Установка не требуется.</p></div>
+      <div class="step glass"><div class="n">3</div><h3>Введи ник и играй</h3><p>Выбери версию и нажми «Играть». Всё нужное докачается само.</p></div>
+    </div>
+    <div class="warn"><b>Windows может сказать «Защитник Windows предотвратил запуск».</b> Лаунчер без платной цифровой подписи, поэтому Windows не знает его издателя. Нажми <b>Подробнее → Выполнить в любом случае</b>. Если сомневаешься, скачивай только с этой страницы.</div>
+  </section>
+
+  <section id="faq">
+    <h2>Вопросы</h2>
+    <details class="glass"><summary>Нужна ли установка Java?</summary><p>Нет. Лаунчер сам скачивает подходящую Java от Mojang при первом запуске версии.</p></details>
+    <details class="glass"><summary>Нужен ли аккаунт Microsoft?</summary><p>Нет, вход по нику. Серверы с обязательной проверкой лицензии такой ник не пустят.</p></details>
+    <details class="glass"><summary>Чем отличаются .exe и .zip?</summary><p>Содержимое одинаковое. .exe — один файл, но при каждом запуске он коротко распаковывается во временную папку. В .zip лаунчер стартует чуть быстрее.</p></details>
+    <details class="glass"><summary>Где хранятся игры и настройки?</summary><p>В папке <b>%APPDATA%\NebulaLauncher</b>. Её можно открыть кнопкой 📂 в лаунчере.</p></details>
+    <details class="glass"><summary>Как обновить лаунчер?</summary><p>Он сам предложит обновление при запуске. Можно и вручную: Настройки → Обновления.</p></details>
+  </section>
+
+  <div class="final glass">
+    <h2>Готов играть?</h2>
+    <p class="sub" style="margin-inline:auto">Скачай лаунчер и запускай любую версию Minecraft.</p>
+    <div class="dl"><a class="btn pri" data-dl="exe" href="#"><b>Скачать .exe</b><small><span data-size="exe"></span></small></a><a class="btn sec" data-dl="zip" href="#"><b>Скачать .zip</b><small><span data-size="zip"></span></small></a></div>
+  </div>
+  <footer>Nebula Launcher · неофициальный лаунчер. Minecraft принадлежит Mojang Studios и Microsoft.</footer>
+</div>
+
+<script>
+// ===== НАСТРОЙКИ САЙТА: меняй только этот блок =====
+// Файлы скачиваются из GitHub Releases (последний релиз). Без GitHub они берутся из той же папки, где лежит index.html.
+var SITE = {
+  version: '1.1.0',
+  repo: '',   // "ник/репозиторий" на GitHub. Если сайт стоит на GitHub Pages, определится сам, вписывать не нужно
+  exe: { file: 'NebulaLauncher.exe',       size: '≈ 74 МБ' },
+  zip: { file: 'NebulaLauncher-win64.zip', size: '≈ 110 МБ' }
+};
+// На GitHub Pages адрес вида https://ник.github.io/репозиторий/ -> файлы берём из Releases этого репозитория
+function ghRepo(host, path) {
+  var m = /^([a-z0-9-]+)\.github\.io$/i.exec(host); if (!m) return '';
+  var seg = path.split('/').filter(Boolean)[0];
+  return m[1] + '/' + (seg && !/\.html?$/i.test(seg) ? seg : host);
+}
+var repo = SITE.repo || ghRepo(location.hostname, location.pathname);
+function fileUrl(f) { return repo ? 'https://github.com/' + repo + '/releases/latest/download/' + f : f; }
+document.querySelectorAll('[data-v]').forEach(function (e) { e.textContent = SITE.version; });
+document.querySelectorAll('[data-dl]').forEach(function (a) { a.href = fileUrl(SITE[a.dataset.dl].file); });
+document.querySelectorAll('[data-size]').forEach(function (s) { s.textContent = SITE[s.dataset.size].size; });
+
+// Телефон и планшет: лаунчер только для Windows
+if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) { document.getElementById('mobile').hidden = false; }
+document.getElementById('copylink').addEventListener('click', function () {
+  var b = this, url = location.href.split('#')[0], done = function () { b.textContent = 'Ссылка скопирована ✓'; };
+  function fallback() { var t = document.createElement('input'); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); done(); } catch (e) { b.textContent = url; } t.remove(); }
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback); else fallback();
+});
+
+// фоновые частицы, как в лаунчере
+(function () {
+  var c = document.getElementById('fx'), x = c.getContext('2d'), w, h, ps = [];
+  function rs() { w = c.width = innerWidth; h = c.height = innerHeight; } rs(); addEventListener('resize', rs);
+  for (var i = 0; i < 55; i++) ps.push({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, r: Math.random() * 2 + .5, s: Math.random() * .4 + .1, a: Math.random() * .5 + .15 });
+  function f() { x.clearRect(0, 0, w, h); ps.forEach(function (p) { p.y -= p.s; if (p.y < -5) { p.y = h + 5; p.x = Math.random() * w; } x.fillStyle = 'rgba(255,255,255,' + p.a + ')'; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill(); }); requestAnimationFrame(f); }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) f();
+})();
+</script>
+</body>
+</html>
